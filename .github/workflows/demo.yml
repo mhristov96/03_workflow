@@ -28,7 +28,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: test
+          name: dist-files
           path: dist
 
   deploy:
@@ -36,6 +36,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: aws
     steps:
+      - name:
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-files
+          path: dist
       - name: Deploy
         uses: joutvhu/upload-s3@v1
         with:
