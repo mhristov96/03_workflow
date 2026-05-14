@@ -28,13 +28,21 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: dist-files
-          path: |
-            dist
-            package.json
+          name: test
+          path: dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: echo "Deploying..."
+        uses: joutvhu/upload-s3@v1
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+          aws_region: us-east-1
+          aws_bucket: miroartifact 
+          source: './dist'
+          target: ''
+          acl: public-read
+          delete: true
