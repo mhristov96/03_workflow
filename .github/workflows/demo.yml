@@ -34,6 +34,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment: aws
     steps:
       - name: Deploy
         uses: joutvhu/upload-s3@v1
