@@ -1,4 +1,5 @@
 name: Deploy website
+run-name: Deploy to S3
 on:
   push:
     branches:
